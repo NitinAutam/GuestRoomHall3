@@ -35,6 +35,18 @@ const limit = (ip) => {
 };
 
 export function middleware(request) {
+  // Allow OPTIONS requests for CORS preflight
+  if (request.method === 'OPTIONS') {
+    return new NextResponse(null, {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
+    });
+  }
+
   const ip = request.headers.get('x-forwarded-for') || request.ip || 'unknown';
   // console.log(`Incoming request from IP: ${ip}`);
 

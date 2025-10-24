@@ -28,6 +28,12 @@ const crypto = require("crypto");
 
 const details = async (req, res) => {
   try {
+    // Handle preflight CORS requests
+    if (req.method === 'OPTIONS') {
+      res.status(200).end();
+      return;
+    }
+
     if (req.method !== "POST") {
       return responseHandler(res, false, 405, invalid_request_method);
     }

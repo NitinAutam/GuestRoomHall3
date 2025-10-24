@@ -19,6 +19,12 @@ const { emailToNotifyWarden } = require("@/mailing/emailToNotifyWarden");
 
 const checkOTP = async (req, res) => {
   try {
+    // Handle preflight CORS requests
+    if (req.method === 'OPTIONS') {
+      res.status(200).end();
+      return;
+    }
+
     if (req.method !== "POST") {
       return responseHandler(res, false, 400, invalid_request_method);
     }

@@ -14,7 +14,8 @@ const VisitorDetails = ({ tabChange, tab }) => {
       updatedRelationship = [...form.visitor_details.relationship];
 
     const { value, id, name } = ev.target;
-    const index = parseInt(id);
+    // Extract index from unique ID format (e.g., "visitor-name-0" -> 0)
+    const index = parseInt(id.split('-').pop());
 
     setForm((prevForm) => {
       if (name === "name") {
@@ -89,7 +90,7 @@ const VisitorDetails = ({ tabChange, tab }) => {
             <TextField
               key={indx}
               required
-              id={indx}
+              id={`visitor-name-${indx}`}
               name="name"
               type="text"
               label={`Person ${indx + 1} Name`}
@@ -107,7 +108,7 @@ const VisitorDetails = ({ tabChange, tab }) => {
             <TextField
               key={indx}
               required
-              id={indx}
+              id={`visitor-phone-${indx}`}
               name="phone"
               type="number"
               label={`Phone: Person ${indx + 1}`}
@@ -138,7 +139,7 @@ const VisitorDetails = ({ tabChange, tab }) => {
               key={indx}
               required
               name="relationship"
-              id={indx}
+              id={`visitor-relationship-${indx}`}
               type="text"
               label={`Relationship of Person ${indx + 1} with Indentor`}
               value={form?.visitor_details?.relationship[indx] ?? ""}

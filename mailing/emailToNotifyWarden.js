@@ -51,7 +51,6 @@ const emailToNotifyWarden = async (email, res) => {
     await transporter.sendMail(mailOptions);
 
     return responseHandler(res, true, 200, email_booking_request_success);
-
   } catch (error) {
     console.error("Error sending email:", error);
     return responseHandler(res, false, 500, email_send_error);

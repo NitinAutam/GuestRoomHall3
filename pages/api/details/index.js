@@ -40,7 +40,11 @@ const details = async (req, res) => {
 
     console.log(room_details);
 
-    const { success, message } = await schemaValidator(roomDetailsSchema, null, room_details);
+    const { success, message } = await schemaValidator(
+      roomDetailsSchema,
+      null,
+      room_details
+    );
     if (!success) {
       return responseHandler(res, false, 401, message);
     }
@@ -58,7 +62,11 @@ const details = async (req, res) => {
       return responseHandler(res, false, 400, invalid_room_details);
     }
 
-    const { success: success2, message: message2 } = await schemaValidator(visitorDetailsSchema, null, visitor_details);
+    const { success: success2, message: message2 } = await schemaValidator(
+      visitorDetailsSchema,
+      null,
+      visitor_details
+    );
     if (!success2) {
       return responseHandler(res, false, 401, message2);
     }
@@ -77,7 +85,11 @@ const details = async (req, res) => {
       return responseHandler(res, false, 400, invalid_visitor_details);
     }
 
-    const { success: success3, message: message3 } = await schemaValidator(indentorDetailsSchema, null, indentor_details);
+    const { success: success3, message: message3 } = await schemaValidator(
+      indentorDetailsSchema,
+      null,
+      indentor_details
+    );
     if (!success3) {
       return responseHandler(res, false, 401, message3);
     }
@@ -153,7 +165,11 @@ const details = async (req, res) => {
 
     // Debug: Log the OTP being sent via email
     console.log("DEBUG - OTP being generated:", otp, typeof otp);
-    console.log("DEBUG - OTP stored in DB:", bookingData.OTP.value, typeof bookingData.OTP.value);
+    console.log(
+      "DEBUG - OTP stored in DB:",
+      bookingData.OTP.value,
+      typeof bookingData.OTP.value
+    );
 
     return await emailToIndentorForOTP(
       newData.indentorDetails.name,

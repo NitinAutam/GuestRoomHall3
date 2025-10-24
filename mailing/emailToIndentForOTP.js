@@ -3,7 +3,11 @@ var nodemailer = require("nodemailer");
 var hbs = require("nodemailer-express-handlebars");
 const findHec = require("@/utils/findHec");
 const responseHandler = require("@/utils/responseHandler");
-const { indentor_confirmation_otp_email, indentor_askfor_otp_email, email_send_error } = require("@/important_data/important_data");
+const {
+  indentor_confirmation_otp_email,
+  indentor_askfor_otp_email,
+  email_send_error,
+} = require("@/important_data/important_data");
 
 const emailToIndentorForOTP = async (name, otp, email, id, res) => {
   try {

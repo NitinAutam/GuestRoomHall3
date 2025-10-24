@@ -82,25 +82,24 @@ const IndentorDetails = ({ tabChange, tab }) => {
     },
   };
 
-  const btnHandler = async(route)=>{
+  const btnHandler = async (route) => {
     try {
-      const payload = route === 'details'? JSON.stringify(form):{
-        otp_password,
-        requestId
-      }
-      const { data } = await axios.post(
-        `/api/${route}`,
-        payload,
-        config
-      );
-      if(route === 'checkOTP'){
+      const payload =
+        route === "details"
+          ? JSON.stringify(form)
+          : {
+              otp_password,
+              requestId,
+            };
+      const { data } = await axios.post(`/api/${route}`, payload, config);
+      if (route === "checkOTP") {
         setOtp_password("");
       }
       if (data?.success ?? false) {
-        if(route === 'details'){
+        if (route === "details") {
           setOtp(true);
           setRequestId(data.id);
-        }else{
+        } else {
           setDisableOTP(true);
           router.push("/");
           localStorage.clear();
@@ -109,13 +108,13 @@ const IndentorDetails = ({ tabChange, tab }) => {
         toast.success(data.message, { toastId: `${route}_1` });
       } else {
         toast.error(data.message, { toastId: `${route}_2` });
-      }      
+      }
     } catch (error) {
       toast.error(error?.response?.data?.message ?? error.message, {
         toastId: `${route}_3`,
       });
     }
-  }
+  };
 
   return (
     <div className={"" + (tab === "1" || tab === "2" ? "hidden" : "")}>
@@ -219,7 +218,7 @@ const IndentorDetails = ({ tabChange, tab }) => {
             disabled={checkValidForm() ?? true}
             style={{ marginTop: "0.5rem" }}
             className="btns"
-            onClick={() => btnHandler('details')}
+            onClick={() => btnHandler("details")}
           >
             Submit
           </Button>
@@ -230,7 +229,7 @@ const IndentorDetails = ({ tabChange, tab }) => {
             disabled={otp_password?.trim()?.length === 0 ?? true}
             style={{ marginTop: "0.5rem" }}
             className="btns"
-            onClick={() => btnHandler('checkOTP')}
+            onClick={() => btnHandler("checkOTP")}
           >
             Check
           </Button>

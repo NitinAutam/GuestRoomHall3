@@ -25,12 +25,20 @@ const checkOTP = async (req, res) => {
 
     const { otp_password, requestId } = req.body;
 
-    const { success, message } = await schemaValidator(bookingIdSchema, 'bookingId', requestId);
+    const { success, message } = await schemaValidator(
+      bookingIdSchema,
+      "bookingId",
+      requestId
+    );
     if (!success) {
       return responseHandler(res, false, 401, message);
     }
 
-    const { success: success2, message: message2 } = await schemaValidator(otpSchema, 'otp', otp_password);
+    const { success: success2, message: message2 } = await schemaValidator(
+      otpSchema,
+      "otp",
+      otp_password
+    );
     if (!success2) {
       return responseHandler(res, false, 401, message2);
     }
@@ -51,7 +59,7 @@ const checkOTP = async (req, res) => {
     }
 
     const time1 = moment.tz(Date.now(), timezone_date);
-    const time2 = moment.tz(bookingData.OTP.expiryTime, timezone_date)
+    const time2 = moment.tz(bookingData.OTP.expiryTime, timezone_date);
 
     if (time1 > time2) {
       return responseHandler(res, false, 401, otp_expired);
@@ -70,8 +78,12 @@ const checkOTP = async (req, res) => {
     const roomNos = allBookings.map((booking) => booking.roomDetails.roomNo);
     const approvalLevel = allBookings.map((booking) => booking.approvalLevel);
 
-    const arrival_date = moment(bookingData.arrivalDate, "DD/MM/YYYY").tz(timezone_date);
-    const departure_date = moment(bookingData.departureDate, "DD/MM/YYYY").tz(timezone_date);
+    const arrival_date = moment(bookingData.arrivalDate, "DD/MM/YYYY").tz(
+      timezone_date
+    );
+    const departure_date = moment(bookingData.departureDate, "DD/MM/YYYY").tz(
+      timezone_date
+    );
 
     while (arrival_date.isSameOrBefore(departure_date)) {
       const date = arrival_date.tz(timezone_date).format("DD/MM/YYYY");
@@ -119,7 +131,9 @@ const checkOTP = async (req, res) => {
 
     return await emailToNotifyWarden(warden_email_list, res);
   } catch (error) {
-    console.log(`Some error occurend while checking the otp by the Indentor: ${error.message}`);
+    console.log(
+      `Some error occurend while checking the otp by the Indentor: ${error.message}`
+    );
     return responseHandler(res, false, 500, internal_server_error);
   }
 };

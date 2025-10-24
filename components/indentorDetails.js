@@ -53,7 +53,7 @@ const IndentorDetails = ({ tabChange, tab }) => {
         (detail ?? "")
           .trim()
           .substring((detail ?? "").length - 10, (detail ?? "").length) !==
-          "iiiiitk.ac.in"
+          "iitk.ac.in"
       );
     } else if (name === "phone") {
       return (
@@ -135,7 +135,7 @@ const IndentorDetails = ({ tabChange, tab }) => {
           label="Roll No"
           type="number"
           name="indentor_details.roll"
-          disabled={otp ?? true}
+          disabled={otp}
           value={form?.indentor_details?.roll ?? ""}
           onChange={changeHandler}
           error={checkIndentorField("roll") ?? true}
@@ -148,7 +148,7 @@ const IndentorDetails = ({ tabChange, tab }) => {
           type="email"
           name="indentor_details.email"
           value={form?.indentor_details?.email ?? ""}
-          disabled={otp ?? true}
+          disabled={otp}
           onChange={changeHandler}
           error={checkIndentorField("email") ?? true}
         />
@@ -157,7 +157,7 @@ const IndentorDetails = ({ tabChange, tab }) => {
           label="Phone"
           type="number"
           name="indentor_details.phone"
-          disabled={otp ?? true}
+          disabled={otp}
           value={form?.indentor_details?.phone ?? ""}
           onChange={changeHandler}
           error={checkIndentorField("phone") ?? true}
@@ -206,7 +206,7 @@ const IndentorDetails = ({ tabChange, tab }) => {
       <FormBox>
         <Button
           variant="outlined"
-          disabled={otp ?? true}
+          disabled={otp}
           style={{ marginRight: "1rem", marginTop: "0.5rem" }}
           className="btns"
           onClick={(_) => tabChange("2")}

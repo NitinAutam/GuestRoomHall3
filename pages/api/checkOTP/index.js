@@ -46,7 +46,7 @@ const checkOTP = async (req, res) => {
       return responseHandler(res, false, 404, booking_id_not_found);
     }
 
-    if (bookingData.OTP.value !== otp_password) {
+    if (bookingData.OTP.value !== otp_password.toString()) {
       return responseHandler(res, false, 401, invalid_otp);
     }
 

@@ -2,14 +2,16 @@ const path = require("path");
 var nodemailer = require("nodemailer");
 var hbs = require("nodemailer-express-handlebars");
 const findHec = require("@/utils/findHec");
-const { indentor_confirmation_otp_email, indentor_askfor_otp_email } = require("@/important_data/important_data");
+const responseHandler = require("@/utils/responseHandler");
+const { indentor_confirmation_otp_email, indentor_askfor_otp_email, email_send_error } = require("@/important_data/important_data");
 
 const emailToIndentorForOTP = async (name, otp, email, id, res) => {
   try {
     var transporter = nodemailer.createTransport({
       host: process.env.EMAIL_SERVICE,
       port: process.env.EMAIL_PORT,
-      secure: true,
+      secure: false, // Use STARTTLS instead of SSL
+      requireTLS: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,

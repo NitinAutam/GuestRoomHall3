@@ -142,7 +142,7 @@ const details = async (req, res) => {
       .add(email_otp_expiry_time_minutes, "m")
       .toDate();
 
-    bookingData.OTP.value = otp;
+    bookingData.OTP.value = otp.toString(); // Convert to string for consistency
     bookingData.OTP.expiryTime = expiry_time;
 
     const newData = await bookingData.save();
@@ -150,6 +150,10 @@ const details = async (req, res) => {
     if (!newData) {
       return responseHandler(res, false, 500, error_occurred);
     }
+
+    // Debug: Log the OTP being sent via email
+    console.log("DEBUG - OTP being generated:", otp, typeof otp);
+    console.log("DEBUG - OTP stored in DB:", bookingData.OTP.value, typeof bookingData.OTP.value);
 
     return await emailToIndentorForOTP(
       newData.indentorDetails.name,

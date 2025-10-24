@@ -15,7 +15,8 @@ const emailToNotifyWarden = async (email, res) => {
     var transporter = nodemailer.createTransport({
       host: process.env.EMAIL_SERVICE,
       port: process.env.EMAIL_PORT,
-      secure: true,
+      secure: false, // Use STARTTLS instead of SSL
+      requireTLS: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,

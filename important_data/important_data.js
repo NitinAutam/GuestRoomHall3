@@ -15,7 +15,7 @@ exports.rules_sub_heading = ["Key collection time: 10 am to 5 pm except Sunday."
 
 
 
-exports.warden_email_list = ["warden@gmail.com"];
+exports.warden_email_list = ["gautamnitin248@gmail.com"];
 exports.hall_office_email_list = ["hall1@gmail.com", "hall2@iitk.ac.in"];
 
 
